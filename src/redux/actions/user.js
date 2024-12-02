@@ -60,7 +60,7 @@ export const logout = () => async dispatch => {
 export const isUserLoggedIn = () => async dispatch => {
     try {
         dispatch({ type: 'isLoggedInRequest' });
-        const { data } = await axios.get(`${server}/isloggedin`, {
+        const { data } = await axios.get(`${server}/getme`, {
             withCredentials: true,
         });
         dispatch({ type: 'isLoggedInSuccess', payload: data });
