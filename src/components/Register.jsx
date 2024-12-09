@@ -10,7 +10,7 @@ const Register = () => {
         fullName: '',
         email: '',
         dateOfBirth: '',
-        phoneNumber: '',
+        phoneNumber: '+91', // Initialize with +91
         password: '',
         confirmPassword: '',
     });
@@ -24,7 +24,7 @@ const Register = () => {
         let { name, value } = e.target;
 
         if (name === 'phoneNumber' && !value.startsWith('+91')) {
-            value = `+91${value}`;
+            value = `+91${value.replace(/^\+91/, '')}`; // Ensure +91 is enforced
         }
 
         setFormData({
@@ -46,7 +46,7 @@ const Register = () => {
             toast.error('Enter Date of Birth in MM/DD/YYYY format.');
             return false;
         }
-        if (!formData.phoneNumber || !/^(\+91)?\d{10}$/.test(formData.phoneNumber)) {
+        if (!formData.phoneNumber || !/^\+91\d{10}$/.test(formData.phoneNumber)) {
             toast.error('Enter a valid 10-digit phone number.');
             return false;
         }
@@ -175,12 +175,10 @@ const Register = () => {
                             </button>
                             <Link
                                 to="/login"
-                                className="w-1/2 text-center  hover:underline"
+                                className="w-1/2 text-center hover:underline"
                             >
                                 Already have an account? &nbsp;
-                                <span
-                                    className='text-[#f98b03]'
-                                >
+                                <span className="text-[#f98b03]">
                                     Login
                                 </span>
                             </Link>
